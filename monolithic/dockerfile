@@ -1,0 +1,7 @@
+FROM node
+COPY . /app
+WORKDIR /app
+RUN npm install
+ENV PORT 7000
+EXPOSE 7000
+ENTRYPOINT ["npm", "start"]

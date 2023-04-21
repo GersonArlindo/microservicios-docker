@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  monolithic:
+    build: ./monolithic
+
+  authors:
+    build: ./microservices/authors-service
+
+  books:
+    build: ./microservices/books-service
+
+  countries:
+    build: ./microservices/countries-service
+  
+  languages:
+    build: ./microservices/languages-service
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - monolithic
+      - authors
+      - books
+      - countries
+      - languages
